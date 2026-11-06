@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Irene's English Review Worksheet (Classes 3-7)</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #e0e7ff;
+            --secondary: #0ea5e9;
+            --success: #10b981;
+            --success-bg: #d1fae5;
+            --danger: #ef4444;
+            --danger-bg: #fee2e2;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px 15px 60px;
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 28px 24px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.2);
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 1.75rem;
+            margin-bottom: 6px;
+        }
+
+        header p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        /* Navigation Tabs */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 12px 10px;
+            background: var(--card);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .tab-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: var(--border);
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--primary);
+            width: 20%;
+            transition: width 0.3s ease;
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .topic-banner {
+            background: var(--primary-light);
+            border-left: 5px solid var(--primary);
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .topic-banner h2 {
+            color: var(--primary);
+            font-size: 1.25rem;
+            margin-bottom: 4px;
+        }
+
+        .topic-banner p {
+            font-size: 0.9rem;
+            color: #3730a3;
+        }
+
+        /* Word Bank */
+        .word-bank {
+            background: #fffbeb;
+            border: 1px dashed #f59e0b;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .word-bank-title {
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: #b45309;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .word-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .word-pill {
+            background: white;
+            border: 1px solid #fcd34d;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #92400e;
+        }
+
+        /* Question Card */
+        .question-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: border-color 0.2s;
+        }
+
+        .q-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .q-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 6px;
+            background: #f1f5f9;
+            color: var(--text-muted);
+        }
+
+        .q-text {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+
+        .q-hint {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            display: block;
+            margin-top: 2px;
+        }
+
+        /* Multiple Choice Options */
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 10px 14px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.15s;
+            font-size: 0.95rem;
+        }
+
+        .option-label:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        .option-label input {
+            margin-right: 12px;
+            transform: scale(1.2);
+            accent-color: var(--primary);
+        }
+
+        /* Fill in the blank Input */
+        .fib-input {
+            width: 100%;
+            max-width: 320px;
+            padding: 10px 14px;
+            font-size: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .fib-input:focus {
+            border-color: var(--primary);
+        }
+
+        /* Feedback Box */
+        .feedback {
+            display: none;
+            margin-top: 12px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .feedback.correct {
+            display: block;
+            background: var(--success-bg);
+            color: #065f46;
+            border: 1px solid #6ee7b7;
+        }
+
+        .feedback.incorrect {
+            display: block;
+            background: var(--danger-bg);
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+
+        /* Buttons & Footer Nav */
+        .page-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 24px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 22px;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-check {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-check:hover {
+            background: #059669;
+        }
+
+        .btn-nav {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-nav:hover {
+            background: #4338ca;
+        }
+
+        .btn-outline {
+            background: white;
+            border: 2px solid var(--border);
+            color: var(--text);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--text-muted);
+        }
+
+        /* Summary Card */
+        .summary-card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 32px 24px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+
+        .score-circle {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            border: 6px solid var(--primary);
+        }
+
+        .score-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 0.85rem;
+            margin-top: 4px;
+            font-weight: 600;
+        }
+
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            text-align: left;
+            margin-top: 28px;
+        }
+
+        .note-box {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            padding: 16px;
+            border-radius: 10px;
+        }
+
+        .note-box h4 {
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .note-box ul {
+            padding-left: 18px;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .note-box li {
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>✨ Irene's English Review Quiz ✨</h1>
+        <p>Homework Worksheet • Vocabulary, Phrases & Grammar (Classes 3–7)</p>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="tabs">
+        <button class="tab-btn active" onclick="goToPage(1)">Page 1: Grammar</button>
+        <button class="tab-btn" onclick="goToPage(2)">Page 2: Weekend & Travel</button>
+        <button class="tab-btn" onclick="goToPage(3)">Page 3: Celebrations</button>
+        <button class="tab-btn" onclick="goToPage(4)">Page 4: Pronunciation & Chat</button>
+        <button class="tab-btn" onclick="goToPage(5)">🏆 Results & Notes</button>
+    </div>
+
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- ==================== PAGE 1: GRAMMAR ==================== -->
+    <div class="page active" id="page1">
+        <div class="topic-banner">
+            <h2>Topic 1: Grammar — "Have been", "Do you", & Past Actions</h2>
+            <p>Focus: Talking about how things have been recently (最近都在...) and answering questions naturally.</p>
+        </div>
+
+        <div class="word-bank">
+            <div class="word-bank-title">💡 Word Bank for Fill-in-the-Blank (Questions 5–7)</div>
+            <div class="word-pills">
+                <span class="word-pill">been</span>
+                <span class="word-pill">has</span>
+                <span class="word-pill">held</span>
+                <span class="word-pill">up</span>
+                <span class="word-pill">haven't</span>
+            </div>
+        </div>
+
+        <!-- Q1 -->
+        <div class="question-card" data-qid="q1" data-type="mc" data-answer="b" data-explain="'Have you been' asks about recent ongoing actions (你最近都在做什麼？).">
+            <div class="q-header"><span class="q-badge">Question 1 • Multiple Choice</span></div>
+            <div class="q-text">A: "What __________ doing recently?" <br>B: "I have been working a lot."</div>
+            <div class="options-list">
+                <label class="option-label"><input type="radio" name="q1" value="a"> do you</label>
+                <label class="option-label"><input type="radio" name="q1" value="b"> have you been</label>
+                <label class="option-label"><input type="radio" name="q1" value="c"> did you</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="question-card" data-qid="q2" data-type="mc" data-answer="a" data-explain="'Work' is singular (it), so we use 'Work has been busy'.">
+            <div class="q-header"><span class="q-badge">Question 2 • Multiple Choice</span></div>
+            <div class="q-text">A: "How has work been?" <br>B: "Work __________ really busy, and I have been very tired."</div>
+            <div class="options-list">
+                <label class="option-label"><input type="radio" name="q2" value="a"> has been</label>
+                <label class="option-label"><input type="radio" name="q2" value="b"> have been</label>
+                <label class="option-label"><input type="radio" name="q2" value="c"> is been</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="question-card" data-qid="q3" data-type="mc" data-answer="c" data-explain="In English, 'like' needs an object! We say 'Yes, I do like it!' instead of just 'I like'.">
+            <div class="q-header"><span class="q-badge">Question 3 • Multiple Choice</span></div>
+            <div class="q-text">A: "Do you like playing Zelda: Tears of the Kingdom?" <br>B: "Yes, I do! I really __________!"</div>
+            <div class="options-list">
+                <label class="option-label"><input type="radio" name="q3" value="a"> like</label>
+                <label class="option-label"><input type="radio" name="q3" value="b"> liked</label>
+                <label class="option-label"><input type="radio" name="q3" value="c"> like it</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="question-card" data-qid="q4" data-type="mc" data-answer="b" data-explain="When a question starts with 'Would you...', we answer with 'Yes, I would' or 'No, I wouldn't'.">
+            <div class="q-header"><span class="q-badge">Question 4 • Multiple Choice</span></div>
+            <div class="q-text">A: "Would you like to hold a big party at your house?" (意願)<br>B: "No, I __________."</div>
+            <div class="options-list">
+                <label class="option-label"><input type="radio" name="q4" value="a"> haven't</label>
+                <label class="option-label"><input type="radio" name="q4" value="b"> wouldn't</label>
+                <label class="option-label"><input type="radio" name="q4" value="c"> don't</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="question-card" data-qid="q5" data-type="fib" data-answer="up" data-explain="'What have you been up to?' is a very natural way to ask 'What have you been doing?'">
+            <div class="q-header"><span class="q-badge">Question 5 • Fill in the Blank</span></div>
+            <div class="q-text">What have you been __________ to recently? <span class="q-hint">(Hint: Same meaning as "What have you been doing?")</span></div>
+            <input type="text" class="fib-input" placeholder="Type 1 word...">
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="question-card" data-qid="q6" data-type="fib" data-answer="been" data-explain="'I have been staying at home' = 我這幾天都待在家。">
+            <div class="q-header"><span class="q-badge">Question 6 • Fill in the Blank</span></div>
+            <div class="q-text">I have __________ staying at home and sleeping a lot for the past 3 days.</div>
+            <input type="text" class="fib-input" placeholder="Type 1 word...">
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="question-card" data-qid="q7" data-type="fib" data-answer="held" data-explain="The past participle of 'hold' (舉辦) is 'held'. Have you ever held a party?">
+            <div class="q-header"><span class="q-badge">Question 7 • Fill in the Blank</span></div>
+            <div class="q-text">Have you ever __________ a party before? <span class="q-hint">(Hint: Past tense of "hold" 舉辦)</span></div>
+            <input type="text" class="fib-input" placeholder="Type 1 word...">
+            <div class="feedback"></div>
+        </div>
+
+        <div class="page-actions">
+            <button class="btn btn-check" onclick="checkPage(1)">✔ Check Page 1 Answers</button>
+            <button class="btn btn-nav" onclick="goToPage(2)">Next Topic: Weekend & Travel ➔</button>
+        </div>
+    </div>
+
+    <!-- ==================== PAGE 2: WEEKEND & TRAVEL ==================== -->
+    <div class="page" id="page2">
+        <div class="topic-banner">
+            <h2>Topic 2: Weekend Life, Beauty & Travel Abroad</h2>
+            <p>Focus: Talking about Alishan hiking, doing chores at home, beauty clinics, and traveling abroad.</p>
+        </div>
+
+        <div class="word-bank">
+            <div class="word-bank-title">💡 Word Bank for Fill-in-the-Blank (Questions 12–14)</div>
+            <div class="word-pills">
+                <span class="word-pill">abroad</span>
+                <span class="word-pill">chores</span>
+                <span class="word-pill">sunrise</span>
+                <span class="word-pill">sunset</span>
+            </div>
+        </div>
+
+        <!-- Q8 -->
+        <div class="question-card" data-qid="q8" data-type="mc" data-answer="b" data-explain="医美診所 in English is 'beauty clinic'.">
+            <div class="q-header"><span class="q-badge">Question 8 • Multiple Choice</span></div>
+            <div class="q-text">I will go to the __________ for my lips this weekend. (醫美診所)</div>
+            <div class="options-list">
+                <label class="option-label"><input type="radio" name="q8" value="a"> nail salon</label>
+                <label class="option-label"><input type="radio" name="q8" value="b"> beauty clinic</label>
+                <label class="option-label"><input type="radio" name="q8" value="c"> massage shop</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Q9 -->
+        <div class="question-card" data-qid="q9" data-type="mc" data-answer="a" data-explain="'Get some work done on my ___' is a natural phrase for getting a cosmetic procedure.">
+            <div class="q-header"><span class="q-badge">Question 9 • Multiple Choice</span></div>
+            <div class="q-text">Which natural phrase means having a cosmetic procedure at a beauty clinic? <br>"I'm going to ________________ on my lips."</div>
+            <div class="options-list">
+                <label class="option-label"><input type="radio" name="q9" value="a"> get some work done</label>
+                <label class="option-label"><input type="radio" name="q9" value="b"> do some chores</label>
+                <label class="option-label"><input type="radio" name="q9" value="c"> make a homework</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Q10 -->
+        <div class="question-card" data-qid="q10" data-type="mc" data-answer="c" data-explain="We can say 'go hiking', 'go on a hike', or 'go for a hike'!">
+            <div class="q-header"><span class="q-badge">Question 10 • Multiple Choice</span></div>
+            <div class="q-text">I will go to Alishan (阿里山) this weekend. I'm going __________!</div>
+            <div class="options-list">
+                <label class="option-label"><input type="radio" name="q10" value="a"> to hike</label>
+                <label class="option-label"><input type="radio" name="q10" value="b"> on hiking</label>
+                <label class="option-label"><input type="radio" name="q10" value="c"> hiking (or "on a hike")</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Q11 -->
+        <div class="question-card" data-qid="q11" data-type="mc" data-answer="b" data-explain="When talking about our age in the past, we use 'I was 26 years old'.">
+            <div class="q-header"><span class="q-badge">Question 11 • Multiple Choice</span></div>
+            <div class="q-text">A: "When was the first time you traveled abroad?" <br>B: "The first time I traveled abroad, I __________ 26 years old."</div>
+            <div class="options-list">
+                <label class="option-label"><input type="radio" name="q11" value="a"> am</label>
+                <label class="option-label"><input type="radio" name="q11" value="b"> was</label>
+                <label class="option-label"><input type="radio" name="q11" value="c"> have been</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Q12 -->
+        <div class="question-card" data-qid="q12" data-type="fib" data-answer="chores" data-explain="'Chores' (家事) means housework like cleaning, laundry, or washing dishes.">
+            <div class="q-header"><span class="q-badge">Question 12 • Fill in the Blank</span></div>
+            <div class="q-text">I didn't do too much over the weekend. I did some __________ and just chilled at home. <span class="q-hint">(Hint: 家事)</span></div>
+            <input type="text" class="fib-input" placeholder="Type 1 word...">
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Q13 -->
+        <div class="question-card" data-qid="q13" data-type="fib" data-answer="sunrise" data-explain="'Sunrise' is 日出 (in the morning), while 'sunset' is 日落 (in the evening).">
+            <div class="q-header"><span class="q-badge">Question 13 • Fill in the Blank</span></div>
+            <div class="q-text">In Alishan, you have to wake up at 4 a.m. and take the train up to the mountain peak to watch the __________. <span class="q-hint">(Hint: 日出)</span></div>
+            <input type="text" class="fib-input" placeholder="Type 1 word...">
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Q14 -->
+        <div class="question-card" data-qid="q14" data-type="fib" data-answer="abroad" data-explain="'Abroad' means 國外 (e.g., travel abroad = 出國旅遊, study abroad = 出國留學).">
+            <div class="q-header"><span class="q-badge">Question 14 • Fill in the Blank</span></div>
+            <div class="q-text">The last time I traveled __________ was back in August this year. <span class="q-hint">(Hint: 國外 / 出國)</span></div>
+            <input type="text" class="fib-input" placeholder="Type 1 word...">
+            <div class="feedback"></div>
+        </div>
+
+        <div class="page-actions">
+            <button class="btn btn-outline" onclick="goToPage(1)">⬅ Previous</button>
+            <button class="btn btn-check" onclick="checkPage(2)">✔ Check Page 2 Answers</button>
+            <button class="btn btn-nav" onclick="goToPage(3)">Next Topic: Celebrations ➔</button>
+        </div>
+    </div>
+
+    <!-- ==================== PAGE 3: CELEBRATIONS & PARTIES ==================== -->
+    <div class="page" id="page3">
+        <div class="topic-banner">
+            <h2>Topic 3: Birthdays, Parties & Festivals</h2>
+            <p>Focus: Vocabulary for celebrating birthdays, Mid-Autumn Festival, and going out with friends.</p>
+        </div>
+
+        <div class="word-bank">
+            <div class="word-bank-title">💡 Word Bank for Fill-in-the-Blank (Questions 19–21)</div>
+            <div class="word-pills">
+                <span class="word-pill">milestone</span>
+                <span class="word-pill">afterwards</span>
+                <span class="word-pill">organized</span>
+                <span class="word-pill">brand</span>
+            </div>
+        </div>
+
+        <!-- Q15 -->
+        <div class="question-card" data-qid="q15" data-type="mc" data-answer="a" data-explain="In English, we say 'turned 30' (成為30歲 / 滿30歲) for birthdays.">
+            <div class="q-header"><span class="q-badge">Question 15 • Multiple Choice</span></div>
+            <div class="q-text">It was a very special birthday for my friend because she __________ 30 last week. (滿30歲)</div>
+            <div class="options-list">
+                <label class="option-label"><input type="radio" name="q15" value="a"> turned</label>
+                <label class="option-label"><input type="radio" name="q15" value="b"> became</label>
+                <label class="option-label"><input type="radio" name="q15" value="c"> grew</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Q16 -->
+        <div class="question-card" data-qid="q16" data-type="mc" data-answer="b" data-explain="'Went out drinking' or 'went out to drink' means going out to bars/clubs with friends.">
+            <div class="q-header"><span class="q-badge">Question 16 • Multiple Choice</span></div>
+            <div class="q-text">A: "How did you celebrate your last birthday?" <br>B: "I __________ with my friends."</div>
+            <div class="options-list">
+                <label class="option-label"><input type="radio" name="q16" value="a"> go out drink</label>
+                <label class="option-label"><input type="radio" name="q16" value="b"> went out drinking (or "went out to drink")</label>
+                <label class="option-label"><input type="radio" name="q16" value="c"> went drinking out</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Q17 -->
+        <div class="question-card" data-qid="q17" data-type="mc" data-answer="c" data-explain="Red bean = 紅豆, salted egg yolk = 鹹蛋黃, white lotus = 白蓮蓉.">
+            <div class="q-header"><span class="q-badge">Question 17 • Multiple Choice</span></div>
+            <div class="q-text">For the Mid-Autumn Festival, my favorite mooncake flavor is red bean and __________ (鹹蛋黃).</div>
+            <div class="options-list">
+                <label class="option-label"><input type="radio" name="q17" value="a"> white lotus</label>
+                <label class="option-label"><input type="radio" name="q17" value="b"> green tea</label>
+                <label class="option-label"><input type="radio" name="q17" value="c"> salted egg yolk</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Q18 -->
+        <div class="question-card" data-qid="q18" data-type="mc" data-answer="a" data-explain="'Awkward' means 尷尬. 'Annoying' means 很煩.">
+            <div class="q-header"><span class="q-badge">Question 18 • Multiple Choice</span></div>
+            <div class="q-text">If you go to a party where you don't know anyone and nobody talks to you, you might feel __________ (尷尬).</div>
+            <div class="options-list">
+                <label class="option-label"><input type="radio" name="q18" value="a"> awkward</label>
+                <label class="option-label"><input type="radio" name="q18" value="b"> annoying</label>
+                <label class="option-label"><input type="radio" name="q18" value="c"> well rested</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Q19 -->
+        <div class="question-card" data-qid="q19" data-type="fib" data-answer="milestone" data-explain="A 'milestone birthday' (里程碑生日) is a big birthday like turning 18, 20, 30, or 50.">
+            <div class="q-header"><span class="q-badge">Question 19 • Fill in the Blank</span></div>
+            <div class="q-text">Turning 20 or 30 is considered a big __________ birthday. <span class="q-hint">(Hint: 里程碑)</span></div>
+            <input type="text" class="fib-input" placeholder="Type 1 word...">
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Q20 -->
+        <div class="question-card" data-qid="q20" data-type="fib" data-answer="afterwards" data-explain="'Afterwards' means 之後 / 後來.">
+            <div class="q-header"><span class="q-badge">Question 20 • Fill in the Blank</span></div>
+            <div class="q-text">We went to a Chinese restaurant for dinner, and __________ we went out drinking. <span class="q-hint">(Hint: 之後)</span></div>
+            <input type="text" class="fib-input" placeholder="Type 1 word...">
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Q21 -->
+        <div class="question-card" data-qid="q21" data-type="fib" data-answer="brand" data-explain="'Brand' means 牌子 / 品牌.">
+            <div class="q-header"><span class="q-badge">Question 21 • Fill in the Blank</span></div>
+            <div class="q-text">What is your favorite __________ of champagne? <span class="q-hint">(Hint: 牌子 / 品牌)</span></div>
+            <input type="text" class="fib-input" placeholder="Type 1 word...">
+            <div class="feedback"></div>
+        </div>
+
+        <div class="page-actions">
+            <button class="btn btn-outline" onclick="goToPage(2)">⬅ Previous</button>
+            <button class="btn btn-check" onclick="checkPage(3)">✔ Check Page 3 Answers</button>
+            <button class="btn btn-nav" onclick="goToPage(4)">Next Topic: Pronunciation & Chat ➔</button>
+        </div>
+    </div>
+
+    <!-- ==================== PAGE 4: PRONUNCIATION & PHRASES ==================== -->
+    <div class="page" id="page4">
+        <div class="topic-banner">
+            <h2>Topic 4: Daily Conversation Phrases & Pronunciation</h2>
+            <p>Focus: Useful phrases ("looking forward", "besides", "fun vs. funny") and -ed pronunciation rules.</p>
+        </div>
+
+        <div class="word-bank">
+            <div class="word-bank-title">💡 Word Bank for Fill-in-the-Blank (Questions 26–28)</div>
+            <div class="word-pills">
+                <span class="word-pill">besides</span>
+                <span class="word-pill">forward</span>
+                <span class="word-pill">rested</span>
+                <span class="word-pill">worth</span>
+            </div>
+        </div>
+
+        <!-- Q22 -->
+        <div class="question-card" data-qid="q22" data-type="mc" data-answer="a" data-explain="'Fun' means enjoyable (好玩). 'Funny' means it makes you laugh (好笑).">
+            <div class="q-header"><span class="q-badge">Question 22 • Multiple Choice</span></div>
+            <div class="q-text">Playing mini games and Splatoon on the Nintendo Switch is really __________ (好玩)!</div>
+            <div class="options-list">
+                <label class="option-label"><input type="radio" name="q22" value="a"> fun</label>
+                <label class="option-label"><input type="radio" name="q22" value="b"> funny</label>
+                <label class="option-label"><input type="radio" name="q22" value="c"> awkward</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Q23 -->
+        <div class="question-card" data-qid="q23" data-type="mc" data-answer="c" data-explain="In Class 6, we practiced: rest-TED, comple-TED, celebra-TED, compe-TED, exci-TED, accep-TED, visi-TED!">
+            <div class="q-header"><span class="q-badge">Question 23 • Multiple Choice (Pronunciation)</span></div>
+            <div class="q-text">How do we pronounce the <strong>"-ed"</strong> ending in words that end in <strong>t</strong> or <strong>d</strong>, like <em>rested, completed, celebrated, competed, excited, visited</em>?</div>
+            <div class="options-list">
+                <label class="option-label"><input type="radio" name="q23" value="a"> It is silent (不發音)</label>
+                <label class="option-label"><input type="radio" name="q23" value="b"> Like a quick "/t/" sound</label>
+                <label class="option-label"><input type="radio" name="q23" value="c"> With an extra syllable: "-TED" / "-ID" (例如 res-TED, celebra-TED)</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Q24 -->
+        <div class="question-card" data-qid="q24" data-type="mc" data-answer="b" data-explain="Massage is pronounced 'ma-SA-ge' (stress on the 2nd syllable). Champagne is 'sham-PANE'.">
+            <div class="q-header"><span class="q-badge">Question 24 • Multiple Choice (Pronunciation)</span></div>
+            <div class="q-text">Which syllable has the main stress (重音) in the word <strong>"massage"</strong> (按摩)?</div>
+            <div class="options-list">
+                <label class="option-label"><input type="radio" name="q24" value="a"> First syllable: <strong>MA</strong>-ssage</label>
+                <label class="option-label"><input type="radio" name="q24" value="b"> Second syllable: ma-<strong>SSAGE</strong> (ma-SA~~ge)</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Q25 -->
+        <div class="question-card" data-qid="q25" data-type="mc" data-answer="b" data-explain="'Compete' (比賽/競爭) -> 'competed' (past tense). Taiwan competed in badminton at the Olympics 2 years ago.">
+            <div class="q-header"><span class="q-badge">Question 25 • Multiple Choice</span></div>
+            <div class="q-text">Taiwan __________ in badminton at the Olympics 2 years ago. (比賽 / 參賽)</div>
+            <div class="options-list">
+                <label class="option-label"><input type="radio" name="q25" value="a"> completed</label>
+                <label class="option-label"><input type="radio" name="q25" value="b"> competed</label>
+                <label class="option-label"><input type="radio" name="q25" value="c"> celebrated</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Q26 -->
+        <div class="question-card" data-qid="q26" data-type="fib" data-answer="besides" data-explain="'Besides work' means 除了工作之外 (其他的).">
+            <div class="q-header"><span class="q-badge">Question 26 • Fill in the Blank</span></div>
+            <div class="q-text">Did you do anything fun __________ work today? — "Yes, I got a massage!" <span class="q-hint">(Hint: 除了...之外 / 其他的)</span></div>
+            <input type="text" class="fib-input" placeholder="Type 1 word...">
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Q27 -->
+        <div class="question-card" data-qid="q27" data-type="fib" data-answer="forward" data-explain="'Looking forward to' = excited for (期待).">
+            <div class="q-header"><span class="q-badge">Question 27 • Fill in the Blank</span></div>
+            <div class="q-text">I am really looking __________ to my trip to Alishan this weekend! <span class="q-hint">(Hint: 期待 = looking _____ )</span></div>
+            <input type="text" class="fib-input" placeholder="Type 1 word...">
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Q28 -->
+        <div class="question-card" data-qid="q28" data-type="fib" data-answer="rested" data-explain="'Well rested' means 休息得很充足 / 睡得很飽.">
+            <div class="q-header"><span class="q-badge">Question 28 • Fill in the Blank</span></div>
+            <div class="q-text">A: "Do you feel well __________ after sleeping for 3 days?" <br>B: "Yes, I do!"</div>
+            <input type="text" class="fib-input" placeholder="Type 1 word...">
+            <div class="feedback"></div>
+        </div>
+
+        <div class="page-actions">
+            <button class="btn btn-outline" onclick="goToPage(3)">⬅ Previous</button>
+            <button class="btn btn-check" onclick="checkPage(4)">✔ Check Page 4 Answers</button>
+            <button class="btn btn-nav" onclick="goToPage(5)">See Final Score & Review Notes 🏆</button>
+        </div>
+    </div>
+
+    <!-- ==================== PAGE 5: SUMMARY & REVIEW NOTES ==================== -->
+    <div class="page" id="page5">
+        <div class="summary-card">
+            <div class="score-circle">
+                <span class="score-number" id="finalScore">0/28</span>
+                <span class="score-label">Total Score</span>
+            </div>
+            <h2 id="scoreMessage">Great effort, Irene! 🎉</h2>
+            <p style="color: var(--text-muted); margin-top: 6px;">Here is a quick cheat-sheet of everything we practiced from Classes 3 to 7.</p>
+
+            <div style="margin-top: 20px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                <button class="btn btn-check" onclick="checkAllPages()">🔄 Calculate / Refresh Total Score</button>
+                <button class="btn btn-outline" onclick="resetQuiz()">🗑️ Reset Worksheet</button>
+            </div>
+
+            <div class="notes-grid">
+                <div class="note-box">
+                    <h4>🗣️ Key Grammar Patterns</h4>
+                    <ul>
+                        <li><strong>What have you been doing / up to?</strong><br>→ <em>I have been working a lot recently.</em></li>
+                        <li><strong>How has work been?</strong><br>→ <em>Work has been busy, and I have been tired.</em></li>
+                        <li><strong>Do you like it?</strong><br>→ <em>Yes, I do! I like <strong>it</strong>!</em> (Remember "it"!)</li>
+                        <li><strong>Have you ever held a party?</strong><br>→ <em>No, I haven't.</em></li>
+                    </ul>
+                </div>
+
+                <div class="note-box">
+                    <h4>🏔️ Weekend & Travel Phrases</h4>
+                    <ul>
+                        <li><strong>beauty clinic</strong> (醫美診所)</li>
+                        <li><em>I'm going to get some work done on my lips.</em></li>
+                        <li><strong>do chores</strong> (做家事) / <strong>chill at home</strong></li>
+                        <li><strong>go hiking / go on a hike</strong> (去爬山/健行)</li>
+                        <li><strong>sunrise</strong> (日出) vs. <strong>sunset</strong> (日落)</li>
+                        <li><strong>travel abroad</strong> (出國) / <strong>study abroad</strong> (留學)</li>
+                    </ul>
+                </div>
+
+                <div class="note-box">
+                    <h4>🎂 Birthdays & Parties</h4>
+                    <ul>
+                        <li><strong>milestone birthday</strong> (里程碑生日)</li>
+                        <li><strong>turned 30</strong> (滿30歲)</li>
+                        <li><strong>go out drinking / shopping</strong> (出去喝酒/逛街)</li>
+                        <li><strong>afterwards</strong> (之後)</li>
+                        <li><strong>organized events</strong> (舉辦活動)</li>
+                        <li><strong>awkward</strong> (尷尬) vs. <strong>annoying</strong> (很煩)</li>
+                    </ul>
+                </div>
+
+                <div class="note-box">
+                    <h4>🔊 Pronunciation Practice</h4>
+                    <ul>
+                        <li><strong>recently</strong> → <em>RE~~zen-ly</em></li>
+                        <li><strong>massage</strong> → <em>ma-SA~~ge</em></li>
+                        <li><strong>champagne</strong> → <em>sham-PANE</em></li>
+                        <li><strong>"-TED" endings:</strong><br>
+                            <em>res-TED, comple-TED, celebra-TED, compe-TED, exci-TED, accep-TED, visi-TED</em></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function goToPage(pageNum) {
+        // Update pages
+        document.querySelectorAll('.page').forEach((p, idx) => {
+            p.classList.toggle('active', idx + 1 === pageNum);
+        });
+
+        // Update tabs
+        document.querySelectorAll('.tab-btn').forEach((b, idx) => {
+            b.classList.toggle('active', idx + 1 === pageNum);
+        });
+
+        // Update progress bar
+        const progress = (pageNum / 5) * 100;
+        document.getElementById('progressBar').style.width = progress + '%';
+
+        if (pageNum === 5) {
+            checkAllPages(false);
+        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function evaluateCard(card) {
+        const type = card.getAttribute('data-type');
+        const correctAns = card.getAttribute('data-answer').toLowerCase().trim();
+        const explain = card.getAttribute('data-explain');
+        const feedbackEl = card.querySelector('.feedback');
+        let userAns = '';
+
+        if (type === 'mc') {
+            const checked = card.querySelector('input[type="radio"]:checked');
+            if (checked) userAns = checked.value.toLowerCase().trim();
+        } else if (type === 'fib') {
+            const input = card.querySelector('.fib-input');
+            if (input) userAns = input.value.toLowerCase().trim();
+        }
+
+        if (!userAns) {
+            feedbackEl.className = 'feedback incorrect';
+            feedbackEl.innerHTML = `⚠️ Please select or type an answer first!`;
+            return false;
+        }
+
+        if (userAns === correctAns) {
+            feedbackEl.className = 'feedback correct';
+            feedbackEl.innerHTML = `✅ <strong>Correct!</strong> ${explain}`;
+            return true;
+        } else {
+            feedbackEl.className = 'feedback incorrect';
+            feedbackEl.innerHTML = `❌ <strong>Not quite!</strong> The correct answer is <strong>"${correctAns}"</strong>. <br>${explain}`;
+            return false;
+        }
+    }
+
+    function checkPage(pageNum) {
+        const page = document.getElementById('page' + pageNum);
+        const cards = page.querySelectorAll('.question-card');
+        cards.forEach(card => evaluateCard(card));
+    }
+
+    function checkAllPages(scrollToTop = false) {
+        const allCards = document.querySelectorAll('.question-card');
+        let correctCount = 0;
+
+        allCards.forEach(card => {
+            const isCorrect = evaluateCard(card);
+            if (isCorrect) correctCount++;
+        });
+
+        const total = allCards.length;
+        document.getElementById('finalScore').textContent = `${correctCount}/${total}`;
+
+        const msgEl = document.getElementById('scoreMessage');
+        const ratio = correctCount / total;
+        if (ratio === 1) {
+            msgEl.textContent = "🌟 Perfect Score! Amazing job, Irene! 🌟";
+        } else if (ratio >= 0.8) {
+            msgEl.textContent = "🎉 Great job, Irene! You remembered almost everything!";
+        } else if (ratio >= 0.5) {
+            msgEl.textContent = "👍 Good effort! Review the red boxes on Pages 1–4 to see what you missed.";
+        } else {
+            msgEl.textContent = "💪 Keep practicing! Go through each page and click 'Check Answers' to learn!";
+        }
+    }
+
+    function resetQuiz() {
+        document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+        document.querySelectorAll('.fib-input').forEach(i => i.value = '');
+        document.querySelectorAll('.feedback').forEach(f => {
+            f.className = 'feedback';
+            f.innerHTML = '';
+        });
+        document.getElementById('finalScore').textContent = '0/28';
+        goToPage(1);
+    }
+</script>
+
+</body>
+</html>
